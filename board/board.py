@@ -25,7 +25,9 @@ class Board:
             for line in in_file:
                 assert(x_coord < 8)
                 for y_coord in range(8):
-                    new_board[x_coord][y_coord] = line[y_coord]
+                    act_field = line[y_coord]
+                    new_board[x_coord][y_coord] = \
+                        act_field if act_field != "-" else None
                 x_coord += 1
 
         return new_board
