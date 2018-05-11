@@ -1,5 +1,5 @@
 import tkinter as tk
-import board as bo
+import board.board as bo
 
 #root = tk.Tk()
 #screen = tk.Canvas(root, width=500, height=500,
