@@ -8,6 +8,10 @@ import board.board as bo
 
 board = bo.Board()
 board.show_board()
+board.move()
+board.show_board()
+board.move()
+board.show_board()
 
 #root.wm_title("ReversAI")
 #root.mainloop()

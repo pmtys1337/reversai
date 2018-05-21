@@ -27,14 +27,20 @@ class TestBoard(ut.TestCase):
             TestBoard.board._Board__board is not \
                 TestBoard.board._Board__get_dcboard())
 
+    def test_get_valid_moves(self):
+        self.assertEqual(
+            [(2,4),(3,5),(4,2),(5,3)],
+            TestBoard.board._Board__valid_moves)
+
+
     def test_is_valid_move(self):
         # move on an empty board
         self.assertEqual(
             False,
-            TestBoard.board._Board__is_valid_move(3, 3)) # x_coord, y_coord
+            TestBoard.board._Board__is_valid_move(3, 3)) # row_idx, col_idx
         self.assertEqual(
             True,
-            TestBoard.board._Board__is_valid_move(0, 0)) # x_coord, y_coord
+            TestBoard.board._Board__is_valid_move(2, 4)) # row_idx, col_idx
 
     def test_make_a_move(self):
         self.assertEqual(
