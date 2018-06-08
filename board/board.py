@@ -54,7 +54,6 @@ class Board:
 
     def __get_valid_moves(self):
         valid_moves = []
-        print(self.__player)
         colour = "w" if self.__player == 0 else "b"
         for row_idx in range(8):
             for col_idx in range(8):
@@ -89,12 +88,38 @@ class Board:
     def __is_valid_move(self, move_x, move_y):
         return (move_x, move_y) in self.__valid_moves
 
-    def __make_a_move(self, move_x, move_y):
-        if self.__is_valid_move(move_x, move_y):
+    def __make_a_move(self, move_row, move_col):
+        if self.__is_valid_move(move_row, move_col):
             colour = "w" if self.__player == 0 else "b"
             new_board = self.__get_dcboard() # we have to use "deep" copy
-            new_board[move_x][move_y] = colour # move
-
+            new_board[move_row][move_col] = colour # move
+            neighbours =[]
+            for row_idx in range(max(0,move_row-1),min(move_row+2,8)):
+                for col_idx in range(max(0,move_col-1),min(move_col+2,8)):
+                    if new_board[row_idx][col_idx] != None:
+                        neighbours.append((row_idx,col_idx))
+            switch_discs = [] # collect tiles for switch
+            for neighbour in neighbours:
+                neigh_row = neighbour[0]
+                neigh_col = neighbour[1]
+                if new_board[neigh_row][neigh_col] != colour:
+                    line = []
+                    delta_row = neigh_row - move_row
+                    delta_col = neigh_col - move_col
+                    tmp_row = neigh_row
+                    tmp_col = neigh_col
+                    while 0 <= tmp_row <= 7 and 0 <= tmp_col <= 7:
+                        line.append((tmp_row,tmp_col))
+                        if new_board[tmp_row][tmp_col] == None:
+                            break
+                        if new_board[tmp_row][tmp_col] == colour:
+                            for disc in line:
+                                switch_discs.append(disc)
+                            break
+                        tmp_row += delta_row
+                        tmp_col += delta_col
+            for disc in switch_discs:
+                new_board[disc[0]][disc[1]] = colour
             return new_board
         # TODO: invalid move case
         return None

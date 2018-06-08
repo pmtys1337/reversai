@@ -47,7 +47,7 @@ class TestBoard(ut.TestCase):
             [[None,None,None,None,None,None,None,None],
              [None,None,None,None,None,None,None,None],
              [None,None,None,None,"w", None,None,None],
-             [None,None,None,"w", "b", None,None,None],
+             [None,None,None,"w", "w", None,None,None],
              [None,None,None,"b", "w", None,None,None],
              [None,None,None,None,None,None,None,None],
              [None,None,None,None,None,None,None,None],
