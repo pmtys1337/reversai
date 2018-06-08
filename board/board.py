@@ -85,8 +85,8 @@ class Board:
 
         return valid_moves
 
-    def __is_valid_move(self, move_x, move_y):
-        return (move_x, move_y) in self.__valid_moves
+    def __is_valid_move(self, move_row, move_col):
+        return (move_row, move_col) in self.__valid_moves
 
     def __make_a_move(self, move_row, move_col):
         if self.__is_valid_move(move_row, move_col):
@@ -98,7 +98,7 @@ class Board:
                 for col_idx in range(max(0,move_col-1),min(move_col+2,8)):
                     if new_board[row_idx][col_idx] != None:
                         neighbours.append((row_idx,col_idx))
-            switch_discs = [] # collect tiles for switch
+            swap_discs = [] # collect tiles for switch
             for neighbour in neighbours:
                 neigh_row = neighbour[0]
                 neigh_col = neighbour[1]
@@ -114,11 +114,11 @@ class Board:
                             break
                         if new_board[tmp_row][tmp_col] == colour:
                             for disc in line:
-                                switch_discs.append(disc)
+                                swap_discs.append(disc)
                             break
                         tmp_row += delta_row
                         tmp_col += delta_col
-            for disc in switch_discs:
+            for disc in swap_discs:
                 new_board[disc[0]][disc[1]] = colour
             return new_board
         # TODO: invalid move case
